@@ -1,0 +1,68 @@
+<!-- generate with chatgpt 
+create web page which show slider with ticks -0.2%, -0.1%, 0%, 0.1%, 0.2%, and input to enter amount, on changing slider should display the calculate value from ticker and amount input to result 
+
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Slider Calculator</title>
+	<style>
+		.slider {
+			-webkit-appearance: none;
+			width: 100%;
+			height: 10px;
+			border-radius: 5px;
+			background: #ddd;
+			outline: none;
+			opacity: 0.7;
+			-webkit-transition: .2s;
+			transition: opacity .2s;
+		}
+		.slider::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			appearance: none;
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			background: #4CAF50;
+			cursor: pointer;
+		}
+		.slider::-moz-range-thumb {
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			background: #4CAF50;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<label for="amount-input">Amount:</label>
+		<input type="number" id="amount-input" value="0" step="0.01">
+	</div>
+	<div>
+		<label for="slider">Rate:</label>
+		<input type="range" min="-0.2" max="0.2" step="0.1" value="0" class="slider" id="slider">
+	</div>
+	<div>
+		<label for="result">Result:</label>
+		<span id="result"></span>
+	</div>
+	<script>
+		const slider = document.getElementById("slider");
+		const amountInput = document.getElementById("amount-input");
+		const result = document.getElementById("result");
+
+		function calculate() {
+			const rate = slider.value;
+			const amount = amountInput.value;
+			const resultValue = amount * (1 + rate / 100);
+			result.textContent = resultValue.toFixed(2);
+		}
+
+		slider.addEventListener("input", calculate);
+		amountInput.addEventListener("input", calculate);
+	</script>
+</body>
+</html>
